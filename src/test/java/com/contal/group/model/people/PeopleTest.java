@@ -22,10 +22,10 @@ public class PeopleTest {
     @Test
     void testCheckManager(){
         //given
-        People admin = new Manager("RexPark", "contal");
+        Manager admin = new Manager("RexPark", "contal");
         // when
-        String id = admin.id();
-        String pass = admin.pass();
+        String id = admin.getId();
+        String pass = admin.getPass();
 
         //then
         assertEquals("RexPark", id);
