@@ -1,16 +1,30 @@
 package com.contal.group.model.money;
 
-abstract public class Coins implements Money{
+public class Coins implements Money{
 
     private int currentCount;
-    public abstract int getValue();
+    private final String value;
 
-    public Coins(int count) {
+    public Coins(String value, int count) {
+        this.value = value;
         this.currentCount = count;
     }
 
     @Override
     public int currentCount() {
         return currentCount;
+    }
+
+    @Override
+    public String getNoteType(){
+        return value;
+    }
+
+    public void addCoin(int count){
+        currentCount += count;
+    }
+
+    public void removeCoin(int count){
+        currentCount -= count;
     }
 }

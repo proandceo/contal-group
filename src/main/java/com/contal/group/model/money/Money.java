@@ -6,5 +6,5 @@ package com.contal.group.model.money;
 public interface Money {
     int currentCount();
 
-    int getValue();
+    String getNoteType();
 }

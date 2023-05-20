@@ -13,8 +13,8 @@ public class MoneyTests {
 
     @BeforeEach
     void beforeEach() {
-        fiftyNote = new FiftyNote(10);
-        twoCoin = new TwoCoin(2);
+        fiftyNote = new Notes("50", 10);
+        twoCoin = new Coins("2", 2);
     }
 
     @DisplayName("Count each Notes")
@@ -37,11 +37,11 @@ public class MoneyTests {
         // given
 
         // when
-        int valueFifty = fiftyNote.getValue();
-        int valueTwenty = twoCoin.getValue();
+        String valueFifty = fiftyNote.getNoteType();
+        String valueTwenty = twoCoin.getNoteType();
 
         // then
-        assertEquals(50, valueFifty);
-        assertEquals(2,  valueTwenty);
+        assertEquals("50", valueFifty);
+        assertEquals("2",  valueTwenty);
     }
 }

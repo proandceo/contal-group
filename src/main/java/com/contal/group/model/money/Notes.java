@@ -3,18 +3,37 @@ package com.contal.group.model.money;
 /**
  * concrete class for 50 note
  */
-abstract class Notes implements Money {
+public class Notes implements Money {
 
     private int currentCount;
-    public abstract int getValue();
+    private final String noteType;
 
-    public Notes(int count) {
+    public Notes(String noteType, int count) {
+        this.noteType = noteType;
         this.currentCount = count;
     }
 
     @Override
     public int currentCount() {
         return currentCount;
+    }
+
+    @Override
+    public String getNoteType(){
+        return noteType;
+    }
+
+    @Override
+    public String toString(){
+        return noteType + " Notes left " + currentCount;
+    }
+
+    public void addNote(int count){
+        currentCount += count;
+    }
+
+    public void removeNote(int count){
+        currentCount -= count;
     }
 
 }
