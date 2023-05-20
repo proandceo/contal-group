@@ -32,6 +32,7 @@ There are some classes and interface
 Figure 1 usercase 1
 
 <img width="295" alt="image" src="https://github.com/proandceo/contal-group/assets/3205452/313c606a-88e8-4a71-9acd-d53021bf6ede">
+
 Figure 2 usercase 2
 
 
