@@ -13,22 +13,22 @@ public class AccountTests {
 
     @BeforeEach
     void BeforeEach(){
-        client = new Client("1234567", "0987", new Account(100));
+        client = new Client( new Account("1234567", "0987",100));
     }
 
     @DisplayName("Check the account number and password")
     @Test
-    void validateAccountNumAndPassword(){
+    void testValidateAccountNumAndPassword(){
         //given
         //when
         //then
-        assertEquals("1234567",client.getAccountNum());
-        assertEquals("0987",client.getPass());
+        assertEquals("1234567",client.getAccount().getAccountNum());
+        assertEquals("0987",client.getAccount().getPassword());
     }
 
     @DisplayName("Check the current balance")
     @Test
-    void checkCurrentBalance(){
+    void testCheckCurrentBalance(){
         //given
         //when
         //then
@@ -37,7 +37,7 @@ public class AccountTests {
 
     @DisplayName("withdraw money from account")
     @Test
-    void withdrawMoneyFromDevice(){
+    void testWithdrawMoneyFromDevice(){
         //given
         //when
         int balance = client.getAccount().withdrawMoney(10);
@@ -47,7 +47,7 @@ public class AccountTests {
 
     @DisplayName("save money from account")
     @Test
-    void saveMoneyFromDevice(){
+    void testSaveMoneyFromDevice(){
         //given
         //when
         int balance = client.getAccount().saveMoney(10);
