@@ -13,7 +13,7 @@ public class AccountTests {
 
     @BeforeEach
     void BeforeEach(){
-        client = new Client( new Account("1234567", "0987",100));
+        client = new Client( new Account("123456", "0987"));
     }
 
     @DisplayName("Check the account number and password")
@@ -22,7 +22,7 @@ public class AccountTests {
         //given
         //when
         //then
-        assertEquals("1234567",client.getAccount().getAccountNum());
+        assertEquals("123456",client.getAccount().getAccountNum());
         assertEquals("0987",client.getAccount().getPassword());
     }
 
@@ -31,27 +31,31 @@ public class AccountTests {
     void testCheckCurrentBalance(){
         //given
         //when
+        client.getAccount().setBalance("123456", "0987");
+
         //then
-        assertEquals(100, client.getAccount().getBalance());
+        assertEquals(1000, client.getAccount().getBalance());
     }
 
     @DisplayName("withdraw money from account")
     @Test
     void testWithdrawMoneyFromDevice(){
         //given
+        client.getAccount().setBalance(client.getAccount().getAccountNum(), client.getAccount().getPassword());
+
         //when
-        int balance = client.getAccount().withdrawMoney(10);
         //then
-        assertEquals(90, balance);
+        assertEquals(990, client.getAccount().withdrawMoney(10));
     }
 
     @DisplayName("save money from account")
     @Test
-    void testSaveMoneyFromDevice(){
+    void testSaveMoneyFromDevice() {
         //given
+        client.getAccount().setBalance(client.getAccount().getAccountNum(), client.getAccount().getPassword());
+
         //when
-        int balance = client.getAccount().saveMoney(10);
         //then
-        assertEquals(110, balance);
+        assertEquals(1010, client.getAccount().saveMoney(10));
     }
 }
