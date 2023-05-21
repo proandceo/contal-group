@@ -4,16 +4,16 @@ import com.contal.group.model.money.Notes;
 import com.contal.group.model.people.Client;
 import com.contal.group.model.people.Admin;
 import com.contal.group.model.people.People;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+/**
+ * about Device like ATM
+ */
 public class DeviceService {
     Admin admin;
     Client client;
     String type;
     static Notes fiftyNote;
     static Notes twentyNote;
-    static final Logger log = LoggerFactory.getLogger(DeviceService.class);
 
     static{
         fiftyNote = new Notes("50", 100);
@@ -21,13 +21,12 @@ public class DeviceService {
     }
 
     /*
-    This device have a supply of cash available for 50 notes and 20 notes
-    and initialisation.
+    This device have a supply of cash available for 50 notes and 20 notes.
      */
     public DeviceService(People people){
         if (people instanceof Admin) {
             admin = (Admin)people;
-            type = "manager";
+            type = "admin";
         }
 
         if (people instanceof Client) {
@@ -45,8 +44,11 @@ public class DeviceService {
         return type;
     }
 
+    /**
+     * only administrator can add notes
+     */
     public void addNote(String type, String noteType, int account){
-        if ("manager".equals(type)) {
+        if ("admin".equals(type)) {
             if (noteType.equals(fiftyNote.getNoteType())) {
                 fiftyNote.addNote(account);
             }
@@ -57,6 +59,9 @@ public class DeviceService {
         }
     }
 
+    /**
+     * when notes like $50, $20 are removed or withdrawn, the total number is also decreased.
+     */
     public void removeNote(String noteType, int account){
         if (noteType.equals(fiftyNote.getNoteType())){
             fiftyNote.removeNote(account);
@@ -71,30 +76,36 @@ public class DeviceService {
         return toString();
     }
 
-    public synchronized void withdrawMoney(Client client, int money){
+    public synchronized int withdrawMoney(Client client, int money){
         client.getAccount().setBalance(client.getAccount().getAccountNum(), client.getAccount().getPassword());
         int balanceOfClient = client.getAccount().getBalance();
         int countFiftyNote = fiftyNote.getCurrentCount();
         int countTwentyNote = twentyNote.getCurrentCount();
 
-        if (money % 10 != 0){
-            log.info("Unable to withdraw");
-        }
+        final int[] style = new CashWithdrawService().checkAmountWithdraw(money);
+        if (style == null) return 0;
+        int balance = 0;
+
         try {
             new CashWithdrawService().cashDispensing(money);
-            client.getAccount().withdrawMoney(money);
+            balance = client.getAccount().withdrawMoney(money);
 
         } catch (Exception e){
-            client.getAccount().setBalance(client.getAccount().getAccountNum(), client.getAccount().getPassword());
-            if (balanceOfClient > client.getAccount().getBalance())
-                client.getAccount().setBalance(balanceOfClient);
-
-            if (countFiftyNote > fiftyNote.getCurrentCount())
-                fiftyNote.setCurrentCount(countFiftyNote);
-
-            if (countTwentyNote > twentyNote.getCurrentCount())
-                twentyNote.setCurrentCount(countTwentyNote);
+            unhandledEvent(client, balanceOfClient, countFiftyNote, countTwentyNote);
         }
+        return balance;
+    }
+
+    private static void unhandledEvent(Client client, int balanceOfClient, int countFiftyNote, int countTwentyNote) {
+        client.getAccount().setBalance(client.getAccount().getAccountNum(), client.getAccount().getPassword());
+        if (balanceOfClient > client.getAccount().getBalance())
+            client.getAccount().setBalance(balanceOfClient);
+
+        if (countFiftyNote > fiftyNote.getCurrentCount())
+            fiftyNote.setCurrentCount(countFiftyNote);
+
+        if (countTwentyNote > twentyNote.getCurrentCount())
+            twentyNote.setCurrentCount(countTwentyNote);
     }
 
     /*
