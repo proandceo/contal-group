@@ -3,18 +3,21 @@ package com.contal.group.service.device;
 
 import java.util.Arrays;
 
+/**
+ * To implement cash withdraw
+ */
 public class CashWithdrawService {
     int twentyCount = 0;
     int fiftyCount = 0;
     int[] arr = {Integer.parseInt((DeviceService.fiftyNote.getNoteType())),
             Integer.parseInt((DeviceService.twentyNote.getNoteType()))};
 
+    /**
+     * when the client withdraws money from their account, it shows the information of note's count.
+     */
     public String cashDispensing(final int money) {
-
-        final int[] style = {20, 40, 50, 70, 80, 100, 150, 60, 110, 200};
-        if (Arrays.stream(style).noneMatch((i -> i == money))) {
-            return "Unable to withdraw";
-        }
+        final int[] style = checkAmountWithdraw(money);
+        if (style == null) return "Unable to withdraw";
 
         int countFiftyNote = DeviceService.fiftyNote.getCurrentCount();
         int countTwentyNote = DeviceService.twentyNote.getCurrentCount();
@@ -45,5 +48,13 @@ public class CashWithdrawService {
                 countNote(money - arr[0]);
             }
         }
+    }
+
+    public int[] checkAmountWithdraw(int money) {
+        final int[] style = {20, 40, 50, 70, 80, 100, 150, 60, 110, 200};
+        if (Arrays.stream(style).noneMatch((i -> i == money))) {
+            return null;
+        }
+        return style;
     }
 }
