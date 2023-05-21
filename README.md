@@ -11,21 +11,27 @@ To build this application, I do my best to follow SOLID principle.
 4.	ISP: Interface segregation principle
 5.	DIP: Dependency inversion principle
  
-There are some classes and interface
-1.	Client
+## There are some classes and interface
+
+1. Client
 : a person to withdraw money
-2.	Bank Account
-: only less the amount of money in this bank account can be withdrawn.
-3.	ATM
+
+2. Bank Account
+: Client's bank information.
+
+3.	Device
 : have and deal with notes
-4.	Auth
-: To check whether the client or administration.
--	Client: enter account number and password
+
+4. Auth
+: To check whether the client or administration.<br>
+-	Client: enter account number and password<br>
 -	Admin: enter special numbers (614510)
+
 5.	Note interface
 : this interface is used in various concrete note classes (FiveNote, TenNote, TwentyNote, FiftyNote, HundredNote, TwoCoin, OneCoin).
+
 6.	Administration
-: To handle the device 
+: To handle the deviceService 
 
 <img width="285" alt="image" src="https://github.com/proandceo/contal-group/assets/3205452/a78c8314-d1e2-4041-a0dc-f1742d986f1a"> 
 
@@ -39,23 +45,25 @@ Figure 2 usercase 2
 How to execute the application
 
 For Client
-1.	Check the authorization
-a.	Enter the password to check the owner
-b.	Enter the amount of money to withdraw
-c.	Check the balance whether the bank account has enough money or not
-i.	If so, do it and reduce the amount of money from device and bank account. However, if failure to dispense money because of an error, the amount of available cash in device and the bank account should not be decreased 
-ii.	If not, show the message why it is impossible to do it.
-2.	When this process is completed above, show the amount of withdraw money on the screen
+1.	Check the authorization<br>
+    a.	Enter the password to check the owner<br>
+    b.	Enter the amount of money to withdraw<br>
+    c.	Check the balance whether the bank account has enough money or not<br>
+i.	If so, do it and reduce the amount of money from deviceService and bank account. However, if failure to dispense money because of an error, the amount of available cash in deviceService and the bank account should not be decreased<br> 
+ii.	If not, show the message why it is impossible to do it.<br>
+
+
+2. When this process is completed above, show the amount of withdraw money on the screen
 
 <img width="245" alt="image" src="https://github.com/proandceo/contal-group/assets/3205452/efb494a1-4eb5-4c3b-926a-d754590b41b9">
 
 Figure 3 Sequence Diagram 1
 
 For Administration
-1.	Before initial the device, check the amount of money.
-a.	If not enough, fill the money in and record it
-2.	Initial Note before implementation.
-a.	Show how many of each type of bank note it has. 
+1.	Before initial the deviceService, check the amount of money.<br>
+a.	If not enough, fill the money in and record it<br>
+2.	Initial Note before implementation.<br>
+a.	Show how many of each type of notes it has.<br> 
 
 <img width="245" alt="image" src="https://github.com/proandceo/contal-group/assets/3205452/1c025b21-f193-42e7-8c71-f51fb59f8f2f">
 
