@@ -1,5 +1,8 @@
 package com.contal.group.model.people;
 
+/**
+ * administrator
+ */
 public class Admin implements People {
 
     String id;

@@ -13,7 +13,7 @@ public class AdminTest {
 
     @BeforeEach
     void BeforeEach(){
-        deviceService = new DeviceService(new Admin("RexPark", "contal"));
+        deviceService = new DeviceService(new Admin("1234111", "0987"));
         type = deviceService.getType();
     }
 
@@ -21,14 +21,14 @@ public class AdminTest {
     @Test
     void testCheckManager(){
         //given
-        Admin admin = new Admin("RexPark", "contal");
+        Admin admin = new Admin("1234111", "0987");
         // when
         String id = admin.getId();
         String pass = admin.getPass();
 
         //then
-        assertEquals("RexPark", id);
-        assertEquals("contal", pass);
+        assertEquals("1234111", id);
+        assertEquals("0987", pass);
     }
 
     @DisplayName("Check who use this device")
@@ -37,7 +37,7 @@ public class AdminTest {
         //given
         //when
         //then
-        assertEquals("manager", type);
+        assertEquals("admin", type);
     }
 
     @DisplayName("Check how much money is left")
