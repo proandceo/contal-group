@@ -1,5 +1,8 @@
 package com.contal.group.model.money;
 
+/**
+ * to use coin later
+ */
 public class Coins implements Money{
 
     int currentCount;
