@@ -11,8 +11,13 @@ public class Coins implements Money{
     }
 
     @Override
-    public int currentCount() {
+    public int getCurrentCount() {
         return currentCount;
+    }
+
+    @Override
+    public void setCurrentCount(int count){
+        this.currentCount = count;
     }
 
     @Override
