@@ -10,10 +10,10 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Auth {
-    private String file;
+public class AuthService {
+    String file;
 
-    public Auth(People people){
+    public AuthService(People people){
         if(people instanceof Admin){
             file = "admin.txt";
         }
@@ -41,14 +41,18 @@ public class Auth {
         return arr;
     }
 
-    public boolean authClient(Client client, File cfile) throws Exception{
-        int size = 0;
-        while(readFileInfo(cfile).size() > size) {
-            if((client.getAccount().getAccountNum()).equals(readFileInfo(cfile).get(size)[0])
-            && (client.getAccount().getPassword()).equals(readFileInfo(cfile).get(size)[1])){
-                return true;
+    public boolean authClient(Client client, File cfile){
+        try {
+            int size = 0;
+            while (readFileInfo(cfile).size() > size) {
+                if ((client.getAccount().getAccountNum()).equals(readFileInfo(cfile).get(size)[0])
+                        && (client.getAccount().getPassword()).equals(readFileInfo(cfile).get(size)[1])) {
+                    return true;
+                }
+                size++;
             }
-            size++;
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return false;
     }
@@ -64,5 +68,4 @@ public class Auth {
         }
         return false;
     }
-
 }
