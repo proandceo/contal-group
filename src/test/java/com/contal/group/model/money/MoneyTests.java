@@ -19,12 +19,12 @@ public class MoneyTests {
 
     @DisplayName("Count each Notes")
     @Test
-    public void testCountNotes() {
+    void testCountNotes() {
         // given
 
         // when
-        int amountFifty = fiftyNote.currentCount();
-        int amountTwo = twoCoin.currentCount();
+        int amountFifty = fiftyNote.getCurrentCount();
+        int amountTwo = twoCoin.getCurrentCount();
 
         // then
         assertEquals(10, amountFifty);
@@ -33,7 +33,7 @@ public class MoneyTests {
 
     @DisplayName("show the value of Money")
     @Test
-    public void testValueNote(){
+    void testValueNote(){
         // given
 
         // when
