@@ -7,13 +7,13 @@ import com.contal.group.model.people.People;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Device {
-    private Admin admin;
-    private Client client;
-    private String type;
-    public final static Notes fiftyNote;
-    public final static Notes twentyNote;
-    private static final Logger log = LoggerFactory.getLogger(Device.class);
+public class DeviceService {
+    Admin admin;
+    Client client;
+    String type;
+    static Notes fiftyNote;
+    static Notes twentyNote;
+    static final Logger log = LoggerFactory.getLogger(DeviceService.class);
 
     static{
         fiftyNote = new Notes("50", 100);
@@ -24,7 +24,7 @@ public class Device {
     This device have a supply of cash available for 50 notes and 20 notes
     and initialisation.
      */
-    public Device(People people){
+    public DeviceService(People people){
         if (people instanceof Admin) {
             admin = (Admin)people;
             type = "manager";
@@ -72,18 +72,20 @@ public class Device {
     }
 
     public synchronized void withdrawMoney(Client client, int money){
+        client.getAccount().setBalance(client.getAccount().getAccountNum(), client.getAccount().getPassword());
         int balanceOfClient = client.getAccount().getBalance();
         int countFiftyNote = fiftyNote.getCurrentCount();
         int countTwentyNote = twentyNote.getCurrentCount();
 
-        if (money%10 != 0){
+        if (money % 10 != 0){
             log.info("Unable to withdraw");
         }
         try {
-            CashWithdraw.cashDispensing(money);
+            new CashWithdrawService().cashDispensing(money);
             client.getAccount().withdrawMoney(money);
 
         } catch (Exception e){
+            client.getAccount().setBalance(client.getAccount().getAccountNum(), client.getAccount().getPassword());
             if (balanceOfClient > client.getAccount().getBalance())
                 client.getAccount().setBalance(balanceOfClient);
 
