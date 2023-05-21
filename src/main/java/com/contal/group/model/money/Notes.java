@@ -1,7 +1,8 @@
 package com.contal.group.model.money;
 
 /**
- * concrete class for 50 note
+ * control notes like $50, $20
+ * also it will use $5, $10, $100 later
  */
 public class Notes implements Money {
 

@@ -1,7 +1,7 @@
 package com.contal.group.model.money;
 
 /***
- * This interface controls the common function each money value anc amount (like 50 notes, 20note, and so on)
+ * This interface for notes and coins
  */
 public interface Money {
     int getCurrentCount();
