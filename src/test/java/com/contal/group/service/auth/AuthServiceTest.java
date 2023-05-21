@@ -40,7 +40,7 @@ public class AuthServiceTest {
 
     @DisplayName("read admin and client files")
     @Test
-    void testReadFile() throws Exception{
+    void testReadFile(){
         //given
         String clientFile = clientAuthService.getFile();
         String adminFile = adminAuthService.getFile();
@@ -64,13 +64,13 @@ public class AuthServiceTest {
         File cfile = new File(clientFile);
 
         //then
-        assertTrue(clientAuthService.authClient(client, cfile));
+        assertTrue(clientAuthService.authPeople(client, cfile));
 
     }
 
     @DisplayName("Check authorization of Admin")
     @Test
-    void testAdminValidation() throws Exception{
+    void testAdminValidation(){
         //given
         String adminFile = adminAuthService.getFile();
 
@@ -78,7 +78,7 @@ public class AuthServiceTest {
         File afile = new File(adminFile);
 
         //then
-        assertTrue(adminAuthService.authAdmin(admin, afile));
+        assertTrue(adminAuthService.authPeople(admin, afile));
     }
 
 }
