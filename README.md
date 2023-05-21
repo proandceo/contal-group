@@ -2,7 +2,7 @@
 a cash dispensing application
 How to build the application
 
-All source code is built based on Java 8+, Junit is used for test suite, and for automated build, the Jenkins is used.
+All source code is built based on Java 8+, Junit is used for test suite, and for automated build, the Gradle is used.
 
 To build this application, I do my best to follow SOLID principle.
 1.	SRP: Single Responsibility Principle
