@@ -2,8 +2,8 @@ package com.contal.group.model.money;
 
 public class Coins implements Money{
 
-    private int currentCount;
-    private final String value;
+    int currentCount;
+    String value;
 
     public Coins(String value, int count) {
         this.value = value;
