@@ -1,10 +1,11 @@
 package com.contal.group.model.bank;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * The information of Client account
@@ -31,8 +32,11 @@ public class Account {
         return password;
     }
 
+    /**
+     * get Balance from accountNum, password in client's information file(client.txt)
+     */
     public void setBalance(String accountNum, String password){
-        List<String[]> arr = readClientInfo();
+        List<String[]> arr = readClientInfoFromFile();
 
         int size = 0;
         int balance = 0;
@@ -52,21 +56,21 @@ public class Account {
         return balance;
     }
 
-    private static List<String[]> readClientInfo() {
+    /**
+     * read the information of client which is accountNum, password and balance
+     *
+     */
+    private List<String[]> readClientInfoFromFile() {
         List<String[]> arr = new ArrayList<>();
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("client.txt").getAbsoluteFile()));
-            String str;
-            while ((str = bufferedReader.readLine()) != null) {
+        String fileName = "client.txt";
+        try(Stream<String> stream = Files.lines(Paths.get(fileName))){
+            for (String str:stream.toList()) {
                 String[] line = str.split(",");
                 arr.add(line);
             }
-
-            bufferedReader.close();
-        }catch (Exception e){
+        }catch (IOException e){
             e.printStackTrace();
         }
-
         return arr;
     }
 
