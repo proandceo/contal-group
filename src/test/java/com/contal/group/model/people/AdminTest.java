@@ -1,21 +1,20 @@
 package com.contal.group.model.people;
 
-import com.contal.group.service.device.Device;
+import com.contal.group.service.device.DeviceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 public class AdminTest {
-    Device device;
+    DeviceService deviceService;
     String type;
 
     @BeforeEach
     void BeforeEach(){
-        device = new Device(new Admin("RexPark", "contal"));
-        type = device.getType();
+        deviceService = new DeviceService(new Admin("RexPark", "contal"));
+        type = deviceService.getType();
     }
 
     @DisplayName("Check the validation of manager")
@@ -48,8 +47,8 @@ public class AdminTest {
         //when
         //then
         if ("manager".equals(type)){
-            assertEquals("50 Notes left 30||20 Notes left 30",
-                    device.checkHowMuchMoneyHasIn());
+            assertEquals("50 Notes left 100||20 Notes left 100",
+                    deviceService.checkHowMuchMoneyHasIn());
         }
     }
 }
