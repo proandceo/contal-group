@@ -5,8 +5,8 @@ package com.contal.group.model.money;
  */
 public class Notes implements Money {
 
-    private int currentCount;
-    private final String noteType;
+    int currentCount;
+    String noteType;
 
     public Notes(String noteType, int count) {
         this.noteType = noteType;
